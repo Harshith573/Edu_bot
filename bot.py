@@ -15,11 +15,13 @@ from langchain_community.llms import HuggingFaceHub
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 import os
+import dotenv
 
+dotenv.load_dotenv()
 
 TELEGRAM_BOT_TOKEN = os.environ.get('TELE_TK')#telegram bot token for EDU-BOT
 llm_name1 = "mistralai/Mistral-7B-Instruct-v0.2"#model name
-file_path = ""#path to the pdf file 
+file_path = "inputFile.pdf"#path to the pdf file 
 
 
 
