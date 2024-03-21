@@ -14,9 +14,10 @@ from langchain_community.llms import HuggingFacePipeline
 from langchain_community.llms import HuggingFaceHub
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+import os
 
 
-TELEGRAM_BOT_TOKEN = ''#telegram bot token for EDU-BOT
+TELEGRAM_BOT_TOKEN = os.environ.get('TELE_TK')#telegram bot token for EDU-BOT
 llm_name1 = "mistralai/Mistral-7B-Instruct-v0.2"#model name
 file_path = ""#path to the pdf file 
 
@@ -64,7 +65,7 @@ def initialize_llmchain(llm_model, temperature, max_tokens, top_k, vector_db):
     #initialize language model using huggine face hub
     llm = HuggingFaceHub(
         repo_id=llm_model, 
-        model_kwargs={"temperature": temperature, "max_new_tokens": max_tokens, "top_k": top_k},huggingfacehub_api_token="")
+        model_kwargs={"temperature": temperature, "max_new_tokens": max_tokens, "top_k": top_k},huggingfacehub_api_token=os.environ.get('HUGGINGFACE_TK'))
     #initialize memory to store and retrieve the conversation
     memory = ConversationBufferMemory(
         memory_key="chat_history",
